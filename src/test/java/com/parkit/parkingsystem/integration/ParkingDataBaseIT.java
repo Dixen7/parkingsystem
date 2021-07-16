@@ -60,7 +60,7 @@ public class ParkingDataBaseIT {
         // Cette place est celle utilisée dans le setup, à l'entrée du véhicule au moment du test
         Assertions.assertTrue(dataBasePrepareService.ticketExistsForVehicleRegNumber("ABCDEF"));
         
-        // La DB étant purgé avant, la place affectée est censé être la numéro 1
+        // La DB de test étant reset, la place affectée est censé être la numéro 1
         Assertions.assertFalse(dataBasePrepareService.slotAvailable(1));
     }
 
