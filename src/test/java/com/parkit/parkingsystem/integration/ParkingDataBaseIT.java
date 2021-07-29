@@ -3,6 +3,7 @@ package com.parkit.parkingsystem.integration;
 import com.parkit.parkingsystem.dao.ParkingSpotDAO;
 import com.parkit.parkingsystem.dao.TicketDAO;
 import com.parkit.parkingsystem.integration.config.DataBaseTestConfig;
+import com.parkit.parkingsystem.integration.config.DataBaseTestUtilities;
 import com.parkit.parkingsystem.integration.service.DataBasePrepareService;
 import com.parkit.parkingsystem.service.ParkingService;
 import com.parkit.parkingsystem.util.InputReaderUtil;
@@ -23,6 +24,7 @@ public class ParkingDataBaseIT {
     private static ParkingSpotDAO parkingSpotDAO;
     private static TicketDAO ticketDAO;
     private static DataBasePrepareService dataBasePrepareService;
+    private static DataBaseTestUtilities dataBaseTestUtilities;
 
     @Mock
     private static InputReaderUtil inputReaderUtil;
@@ -34,6 +36,7 @@ public class ParkingDataBaseIT {
         ticketDAO = new TicketDAO();
         ticketDAO.dataBaseConfig = dataBaseTestConfig;
         dataBasePrepareService = new DataBasePrepareService();
+        dataBaseTestUtilities = new DataBaseTestUtilities();
     }
 
     @BeforeEach
@@ -58,10 +61,10 @@ public class ParkingDataBaseIT {
         parkingService.processIncomingVehicle();
         
         // Cette place est celle utilisée dans le setup, à l'entrée du véhicule au moment du test
-        Assertions.assertTrue(dataBasePrepareService.ticketExistsForVehicleRegNumber("ABCDEF"));
+        Assertions.assertTrue(dataBaseTestUtilities.ticketExistsForVehicleRegNumber("ABCDEF"));
         
         // La DB de test étant reset, la place affectée est censé être la numéro 1
-        Assertions.assertFalse(dataBasePrepareService.slotAvailable(1));
+        Assertions.assertFalse(dataBaseTestUtilities.slotAvailable(1));
     }
 
     @Test
@@ -74,7 +77,7 @@ public class ParkingDataBaseIT {
         parkingService.processExitingVehicle();
         
         // Si le véhicule est sorti, le ticket doit avoir les colonne price et out time non nulles
-        Assertions.assertTrue(dataBasePrepareService.checkPriceAndOutTimeNotNull("ABCDEF"));
+        Assertions.assertTrue(dataBaseTestUtilities.checkPriceAndOutTimeNotNull("ABCDEF"));
     }
 
 }

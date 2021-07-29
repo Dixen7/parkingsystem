@@ -133,7 +133,7 @@ public class FareCalculatorServiceTest {
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR, false);
 
-        ticket.setVehicleRegNumber("78");
+        ticket.setVehicleRegNumber("ABCD");
         ticket.setInTime(inTime);
         ticket.setOutTime(outTime);
         ticket.setParkingSpot(parkingSpot);

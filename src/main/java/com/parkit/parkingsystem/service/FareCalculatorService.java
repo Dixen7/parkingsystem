@@ -18,7 +18,7 @@ public class FareCalculatorService {
         // milliseconds - /1000 -> seconds - /60 -> minutes - /60 -> hours
         double duration = ((durationTime / 1000) / 60) / 60;
         
-        // condition pour mettre á zéro de lla duration pour permettre au parking d'etre gratuit si inferieur à 30mn
+        // condition pour mettre á zéro la durée pour permettre au parking d'etre gratuit si inferieur à 30mn
         if (duration <= 0.5) {
         	ticket.setPrice(0);
         } else {

@@ -93,7 +93,7 @@ public class TicketDAO {
     public int countByVehicleRegNumber(final String vehicleRegNumber) throws Exception {
         final int result;
         try (Connection con = dataBaseConfig.getConnection()) {
-            final PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) as quantity FROM ticket WHERE ticket.VEHICLE_REG_NUMBER = ?");
+            final PreparedStatement ps = con.prepareStatement(DBConstants.COUNT_BY_VEHICLE_REG_NUMBER);
             ps.setString(1, vehicleRegNumber);
             final ResultSet rs = ps.executeQuery();
             if (rs.next()) {
