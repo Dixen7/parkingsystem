@@ -9,8 +9,10 @@ public class Ticket {
     private double price;
     private Date inTime;
     private Date outTime;
-    private int discount;
-
+    private boolean recuringUser;
+    private double discount = 0.05;
+    
+    
     public int getId() {
         return id;
     }
@@ -58,13 +60,17 @@ public class Ticket {
     public void setOutTime(Date outTime) {
         this.outTime = outTime;
     }
-    
-    public int getDiscount() {
-        return this.discount;
-    }
 
-	public void setDiscount(int discount) {
-		this.discount = discount;
-		
+	public boolean isRecuringUser() {
+		return recuringUser;
 	}
+
+	public void setRecuringUser(boolean recuringUser) {
+		this.recuringUser = recuringUser;
+	}
+
+	public double getDiscount() {
+		return discount;
+	}
+
 }

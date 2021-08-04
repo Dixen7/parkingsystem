@@ -13,4 +13,5 @@ public class DBConstants {
 	public static final String TICKET_EXISTS_FOR_VEHICLE_REG_NUMBER = "SELECT COUNT(*) as quantity FROM ticket WHERE ticket.VEHICLE_REG_NUMBER = ?";
 	public static final String SLOT_AVAILABLE = "SELECT * FROM parking WHERE PARKING_NUMBER = ?;";
 	public static final String CHECK_PRICE_AND_OUT_TIME_NOT_NULL = "SELECT COUNT(*) as quantity FROM ticket WHERE VEHICLE_REG_NUMBER = ? and price is not null and out_time is not null;";
+	public static final String COUNT_RECURENT = "select count(*) from ticket where vehicle_reg_number= ?"; ;
 }

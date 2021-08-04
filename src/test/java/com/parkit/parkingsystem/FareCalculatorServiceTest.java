@@ -11,12 +11,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 public class FareCalculatorServiceTest {
 
     private static FareCalculatorService fareCalculatorService;
     private Ticket ticket;
+    
 
     @BeforeAll
     private static void setUp() {
@@ -127,19 +129,16 @@ public class FareCalculatorServiceTest {
     @Test
     void calculateFivePerCentDiscountForRecuringUsers() throws Exception {
         int hours = 1;
-        int discount = 5;
         Date inTime = new Date();
         inTime.setTime(System.currentTimeMillis() - 60 * 60 * 1000 * hours); // 1 hour
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR, false);
-
-        ticket.setVehicleRegNumber("ABCD");
+        ticket.setRecuringUser(true);
         ticket.setInTime(inTime);
         ticket.setOutTime(outTime);
         ticket.setParkingSpot(parkingSpot);
-        ticket.setDiscount(discount);
         fareCalculatorService.calculateFare(ticket);
-        assertEquals((hours * Fare.CAR_RATE_PER_HOUR * (1 - 0.01 * discount)), ticket.getPrice()); // 1 hour multiply by rate per hour, minus 5%
+        assertEquals(((hours * Fare.CAR_RATE_PER_HOUR) - (hours * Fare.CAR_RATE_PER_HOUR) * 5 / 100), ticket.getPrice()); // 1 hour multiply by rate per hour, minus 5%
     }
     
     @Test
@@ -167,7 +166,7 @@ public class FareCalculatorServiceTest {
         ticket.setOutTime(outTime);
         ticket.setParkingSpot(parkingSpot);
         fareCalculatorService.calculateFare(ticket);
-        assertEquals((0 * Fare.BIKE_RATE_PER_HOUR), ticket.getPrice());
+        assertEquals((0.0 * Fare.BIKE_RATE_PER_HOUR), ticket.getPrice());
     }
 
 }

@@ -55,5 +55,31 @@ public class ParkingSpotDAO {
             dataBaseConfig.closeConnection(con);
         }
     }
+    
+    public boolean isReccurent(String regVehicleNumber){
+        Connection con = null;
+        try {
+        	int result = 0;
+            con = dataBaseConfig.getConnection();
+
+            PreparedStatement ps = con.prepareStatement(DBConstants.COUNT_RECURENT);
+            ps.setString(1, regVehicleNumber);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                result = rs.getInt(1);
+            }
+
+            dataBaseConfig.closePreparedStatement(ps);
+            System.out.print(" Nombre de doublon : ");
+            System.out.println(result >= 1);
+            return (result >= 1);
+
+        }catch (Exception ex){
+            logger.error("",ex);
+            return false;
+        }finally {
+            dataBaseConfig.closeConnection(con);
+        }
+    }
 
 }
