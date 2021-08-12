@@ -23,6 +23,12 @@
             <version>2.12.1</version>
         </dependency>
         <dependency>
+		  <groupId>org.assertj</groupId>
+		  <artifactId>assertj-core</artifactId>
+		  <version>3.11.1</version>
+		  <scope>test</scope>
+		</dependency>
+        <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.12.1</version>
@@ -133,5 +139,13 @@
             </plugin>
         </plugins>
     </build>
-
+    <reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>3.0.0-M5</version>
+			</plugin>
+		</plugins>
+	</reporting>
 </project>
